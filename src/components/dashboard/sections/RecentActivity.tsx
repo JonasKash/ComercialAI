@@ -4,39 +4,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Users, Mail, Phone, ExternalLink, Clock, MapPin } from 'lucide-react';
-
-const mockLeads = [
-  {
-    id: 1,
-    name: 'Maria Silva',
-    email: 'maria@email.com',
-    phone: '(11) 99999-9999',
-    status: 'new',
-    source: 'Facebook Ads',
-    value: 2500,
-    time: '5 min atrás'
-  },
-  {
-    id: 2,
-    name: 'João Santos',
-    email: 'joao@email.com',
-    phone: '(11) 88888-8888',
-    status: 'qualified',
-    source: 'Instagram',
-    value: 3200,
-    time: '15 min atrás'
-  },
-  {
-    id: 3,
-    name: 'Ana Costa',
-    email: 'ana@email.com',
-    phone: '(11) 77777-7777',
-    status: 'proposal',
-    source: 'Google Ads',
-    value: 1800,
-    time: '1 hora atrás'
-  }
-];
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
 
 const statusColors = {
   new: 'bg-blue-100 text-blue-800',
@@ -57,6 +26,62 @@ const statusLabels = {
 };
 
 export default function RecentActivity() {
+  const { data: leads, isLoading } = useQuery({
+    queryKey: ['recent-leads'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('leads')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .limit(5);
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+
+  const formatTimeAgo = (dateString: string) => {
+    const date = new Date(dateString);
+    const now = new Date();
+    const diffInMinutes = Math.floor((now.getTime() - date.getTime()) / (1000 * 60));
+    
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes} min atrás`;
+    } else if (diffInMinutes < 1440) {
+      const hours = Math.floor(diffInMinutes / 60);
+      return `${hours} hora${hours > 1 ? 's' : ''} atrás`;
+    } else {
+      const days = Math.floor(diffInMinutes / 1440);
+      return `${days} dia${days > 1 ? 's' : ''} atrás`;
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center">
+            <Users className="h-5 w-5 mr-2" />
+            Leads Recentes
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="border border-gray-100 rounded-lg p-4">
+                <div className="animate-pulse">
+                  <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+                  <div className="h-4 bg-gray-200 rounded w-full"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
+
   return (
     <Card>
       <CardHeader>
@@ -72,7 +97,7 @@ export default function RecentActivity() {
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
-          {mockLeads.map((lead) => (
+          {leads && leads.length > 0 ? leads.map((lead) => (
             <div key={lead.id} className="border border-gray-100 rounded-lg p-4 hover:bg-gray-50 transition-colors">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -92,14 +117,18 @@ export default function RecentActivity() {
                   </div>
                   
                   <div className="flex items-center space-x-4 text-sm text-gray-600 mb-2">
-                    <div className="flex items-center">
-                      <Mail className="h-4 w-4 mr-1" />
-                      {lead.email}
-                    </div>
-                    <div className="flex items-center">
-                      <Phone className="h-4 w-4 mr-1" />
-                      {lead.phone}
-                    </div>
+                    {lead.email && (
+                      <div className="flex items-center">
+                        <Mail className="h-4 w-4 mr-1" />
+                        {lead.email}
+                      </div>
+                    )}
+                    {lead.phone && (
+                      <div className="flex items-center">
+                        <Phone className="h-4 w-4 mr-1" />
+                        {lead.phone}
+                      </div>
+                    )}
                   </div>
                   
                   <div className="flex items-center justify-between">
@@ -107,13 +136,15 @@ export default function RecentActivity() {
                       <Badge className={statusColors[lead.status as keyof typeof statusColors]}>
                         {statusLabels[lead.status as keyof typeof statusLabels]}
                       </Badge>
-                      <span className="text-sm font-medium text-green-600">
-                        R$ {lead.value.toLocaleString()}
-                      </span>
+                      {lead.potential_value && (
+                        <span className="text-sm font-medium text-green-600">
+                          R$ {lead.potential_value.toLocaleString()}
+                        </span>
+                      )}
                     </div>
                     <div className="flex items-center text-xs text-gray-500">
                       <Clock className="h-3 w-3 mr-1" />
-                      {lead.time}
+                      {formatTimeAgo(lead.created_at)}
                     </div>
                   </div>
                 </div>
@@ -123,17 +154,15 @@ export default function RecentActivity() {
                 </Button>
               </div>
             </div>
-          ))}
+          )) : (
+            <div className="text-center py-8">
+              <Users className="h-12 w-12 text-gray-300 mx-auto mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum lead ainda</h3>
+              <p className="text-gray-500 mb-4">Comece criando campanhas para gerar seus primeiros leads</p>
+              <Button>Criar Campanha</Button>
+            </div>
+          )}
         </div>
-        
-        {mockLeads.length === 0 && (
-          <div className="text-center py-8">
-            <Users className="h-12 w-12 text-gray-300 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Nenhum lead ainda</h3>
-            <p className="text-gray-500 mb-4">Comece criando campanhas para gerar seus primeiros leads</p>
-            <Button>Criar Campanha</Button>
-          </div>
-        )}
       </CardContent>
     </Card>
   );

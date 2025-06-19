@@ -4,7 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Sparkles, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { Sparkles, Mail, Lock, Eye, EyeOff, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 export default function AuthPage() {
@@ -17,6 +17,12 @@ export default function AuthPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+
+  const handleTestLogin = () => {
+    setEmail('teste@commercialai.com');
+    setPassword('teste123');
+    setIsLogin(true);
+  };
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -36,7 +42,7 @@ export default function AuthPage() {
           description: "Bem-vindo de volta ao CommercialAI Pro.",
         });
       } else {
-        const { error } = await supabase.auth.signUp({
+        const { data, error } = await supabase.auth.signUp({
           email,
           password,
           options: {
@@ -50,6 +56,25 @@ export default function AuthPage() {
         });
 
         if (error) throw error;
+
+        // Criar perfil do usuário
+        if (data.user) {
+          const { error: profileError } = await supabase
+            .from('profiles')
+            .insert({
+              id: data.user.id,
+              first_name: firstName,
+              last_name: lastName,
+              company_name: companyName,
+              industry: 'Marketing Digital',
+              plan_type: 'free',
+              onboarding_completed: true
+            });
+
+          if (profileError) {
+            console.error('Erro ao criar perfil:', profileError);
+          }
+        }
 
         toast({
           title: "Conta criada com sucesso!",
@@ -101,6 +126,29 @@ export default function AuthPage() {
             {isLogin ? 'Entre na sua conta' : 'Crie sua conta gratuita'}
           </p>
         </div>
+
+        {/* Seção de Teste - Botão para credenciais de teste */}
+        <Card className="mb-4 bg-yellow-50 border-yellow-200">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <User className="h-5 w-5 text-yellow-600 mr-2" />
+                <div>
+                  <p className="text-sm font-medium text-yellow-800">Usuário de Teste</p>
+                  <p className="text-xs text-yellow-600">teste@commercialai.com</p>
+                </div>
+              </div>
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={handleTestLogin}
+                className="border-yellow-300 text-yellow-700 hover:bg-yellow-100"
+              >
+                Usar Teste
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
         <Card>
           <CardHeader>
