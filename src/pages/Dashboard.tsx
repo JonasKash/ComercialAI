@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
 import { useQuery } from '@tanstack/react-query';
 import Sidebar from '@/components/dashboard/Sidebar';
@@ -11,7 +11,7 @@ import AuthWrapper from '@/components/auth/AuthWrapper';
 import { User } from '@supabase/supabase-js';
 
 export default function Dashboard() {
-  const router = useRouter();
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
 

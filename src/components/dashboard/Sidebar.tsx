@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { useRouter } from 'next/router';
+import { useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   Palette, 
@@ -34,7 +34,7 @@ const menuItems = [
 ];
 
 export default function Sidebar({ expanded, onToggle }: SidebarProps) {
-  const router = useRouter();
+  const navigate = useNavigate();
   const { toast } = useToast();
 
   const handleLogout = async () => {
@@ -105,7 +105,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
             return (
               <li key={item.href}>
                 <button
-                  onClick={() => router.push(item.href)}
+                  onClick={() => navigate(item.href)}
                   className={`w-full flex items-center px-3 py-2 rounded-lg transition-colors ${
                     isActive 
                       ? 'bg-purple-800 text-white' 
@@ -133,7 +133,7 @@ export default function Sidebar({ expanded, onToggle }: SidebarProps) {
             <Button 
               size="sm" 
               className="w-full bg-white text-purple-900 hover:bg-gray-100"
-              onClick={() => router.push('/settings?tab=plans')}
+              onClick={() => navigate('/settings?tab=plans')}
             >
               Ver Planos
             </Button>
