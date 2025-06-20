@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CheckCircle, Clock, Target } from 'lucide-react';
+import { CheckCircle, Clock } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { useQuery } from '@tanstack/react-query';
@@ -59,19 +59,19 @@ export default function WelcomeSection() {
       <CardContent className="p-6">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
           <div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">
+            <h1 className="text-2xl font-bold text-foreground mb-2">
               {greeting}, {userName}! 👋
             </h1>
-            <p className="text-gray-600">
+            <p className="text-muted-foreground">
               Você está indo bem! Continue configurando sua conta para maximizar seus resultados.
             </p>
           </div>
           
           <div className="mt-4 md:mt-0 w-full md:w-80">
-            <div className="bg-gray-50 rounded-lg p-4">
+            <div className="bg-muted rounded-lg p-4">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-700">Progresso da Configuração</span>
-                <span className="text-sm text-purple-600">{completedSteps}/{onboardingSteps.length}</span>
+                <span className="text-sm font-medium text-foreground">Progresso da Configuração</span>
+                <span className="text-sm text-primary">{completedSteps}/{onboardingSteps.length}</span>
               </div>
               
               <Progress value={progressPercentage} className="mb-3" />
@@ -82,9 +82,9 @@ export default function WelcomeSection() {
                     {step.completed ? (
                       <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
                     ) : (
-                      <Clock className="h-4 w-4 text-gray-400 mr-2" />
+                      <Clock className="h-4 w-4 text-muted-foreground mr-2" />
                     )}
-                    <span className={step.completed ? 'text-gray-700' : 'text-gray-500'}>
+                    <span className={step.completed ? 'text-foreground' : 'text-muted-foreground'}>
                       {step.label}
                     </span>
                   </div>

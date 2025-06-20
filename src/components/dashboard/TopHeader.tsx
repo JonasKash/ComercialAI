@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Badge } from '@/components/ui/badge';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 interface TopHeaderProps {
   onMenuToggle: () => void;
@@ -22,7 +23,7 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
   const notificationCount = 3;
 
   return (
-    <header className="bg-white border-b border-gray-200 px-4 py-3">
+    <header className="bg-background border-b border-border px-4 py-3">
       <div className="flex items-center justify-between">
         {/* Left side */}
         <div className="flex items-center">
@@ -34,13 +35,13 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
           >
             <Menu className="h-5 w-5" />
           </Button>
-          <h1 className="text-xl font-semibold text-gray-800">{title}</h1>
+          <h1 className="text-xl font-semibold text-foreground">{title}</h1>
         </div>
 
         {/* Center - Search */}
         <div className="hidden md:flex flex-1 max-w-md mx-8">
           <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               type="text"
               placeholder="Buscar campanhas, leads, criativos..."
@@ -53,6 +54,9 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
 
         {/* Right side */}
         <div className="flex items-center space-x-2">
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
           {/* Notifications */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -75,26 +79,26 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
               <DropdownMenuItem className="p-3">
                 <div>
                   <p className="text-sm font-medium">Novo lead gerado</p>
-                  <p className="text-xs text-gray-500">Maria Silva se interessou pela sua campanha</p>
-                  <p className="text-xs text-gray-400 mt-1">2 min atrás</p>
+                  <p className="text-xs text-muted-foreground">Maria Silva se interessou pela sua campanha</p>
+                  <p className="text-xs text-muted-foreground/70 mt-1">2 min atrás</p>
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem className="p-3">
                 <div>
                   <p className="text-sm font-medium">Campanha precisa de atenção</p>
-                  <p className="text-xs text-gray-500">Campanha "Verão 2024" com baixo desempenho</p>
-                  <p className="text-xs text-gray-400 mt-1">1 hora atrás</p>
+                  <p className="text-xs text-muted-foreground">Campanha "Verão 2024" com baixo desempenho</p>
+                  <p className="text-xs text-muted-foreground/70 mt-1">1 hora atrás</p>
                 </div>
               </DropdownMenuItem>
               <DropdownMenuItem className="p-3">
                 <div>
                   <p className="text-sm font-medium">Recomendação da IA</p>
-                  <p className="text-xs text-gray-500">Sugestão para otimizar suas conversões</p>
-                  <p className="text-xs text-gray-400 mt-1">3 horas atrás</p>
+                  <p className="text-xs text-muted-foreground">Sugestão para otimizar suas conversões</p>
+                  <p className="text-xs text-muted-foreground/70 mt-1">3 horas atrás</p>
                 </div>
               </DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-center text-sm text-purple-600">
+              <DropdownMenuItem className="text-center text-sm text-primary">
                 Ver todas as notificações
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -120,10 +124,10 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="flex items-center">
-                <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center mr-2">
-                  <span className="text-sm font-medium text-white">JS</span>
+                <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center mr-2">
+                  <span className="text-sm font-medium text-primary-foreground">JS</span>
                 </div>
-                <span className="hidden md:block text-sm">João Silva</span>
+                <span className="hidden md:block text-sm text-foreground">João Silva</span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -134,7 +138,7 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
               <DropdownMenuItem>Configurações</DropdownMenuItem>
               <DropdownMenuItem>Planos e Cobrança</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem className="text-red-600">
+              <DropdownMenuItem className="text-destructive">
                 Sair
               </DropdownMenuItem>
             </DropdownMenuContent>
