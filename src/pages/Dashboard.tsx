@@ -23,7 +23,6 @@ export default function Dashboard() {
           expanded={sidebarExpanded} 
           onToggle={() => setSidebarExpanded(!sidebarExpanded)} 
         />
-        
         {/* Conteúdo Principal */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Header Superior */}
@@ -31,7 +30,6 @@ export default function Dashboard() {
             onMenuToggle={() => setSidebarExpanded(!sidebarExpanded)}
             title="Dashboard"
           />
-          
           {/* Área de Conteúdo */}
           <main className="flex-1 overflow-y-auto p-4 md:p-6">
             <DashboardContent />

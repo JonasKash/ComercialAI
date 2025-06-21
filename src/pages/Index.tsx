@@ -25,9 +25,11 @@ const Index = () => {
                 Login
               </Button>
             </Link>
-            <Button className="bg-purple-600 hover:bg-purple-700">
-              Começar Grátis
-            </Button>
+            <Link to="/login">
+              <Button className="bg-purple-600 hover:bg-purple-700">
+                Começar Grátis
+              </Button>
+            </Link>
           </nav>
         </div>
       </header>
@@ -47,13 +49,20 @@ const Index = () => {
             Baseado em 25+ anos de experiência em vendas para empreendedores como você.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-lg px-8 py-4">
-              <Zap className="w-5 h-5 mr-2" />
-              Começar Grátis Agora
-            </Button>
-            <Button size="lg" variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50 text-lg px-8 py-4">
-              Ver Demonstração
-            </Button>
+            <Link to="/login">
+              <Button size="lg" className="bg-purple-600 text-white border border-purple-600 hover:bg-white hover:text-purple-700 hover:border-purple-600 text-lg px-8 py-4 transition-colors">
+                <Zap className="w-5 h-5 mr-2" />
+                Começar Grátis Agora
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button
+                size="lg"
+                className="bg-purple-600 text-white border border-purple-600 hover:bg-white hover:text-purple-700 hover:border-purple-600 text-lg px-8 py-4 transition-colors"
+              >
+                Ver Demonstração
+              </Button>
+            </Link>
           </div>
           <div className="flex items-center justify-center space-x-8 text-sm text-gray-500">
             <div className="flex items-center">
@@ -233,8 +242,8 @@ const Index = () => {
                     CRM básico (50 leads)
                   </li>
                 </ul>
-                <Button className="w-full" variant="outline">
-                  Começar Grátis
+                <Button className="w-full" variant="outline" asChild>
+                  <Link to="/login">Começar Grátis</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -277,7 +286,7 @@ const Index = () => {
                     Integrações básicas
                   </li>
                 </ul>
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                <Button className="w-full bg-purple-600 text-white border border-purple-600 hover:bg-white hover:text-purple-700 hover:border-purple-600 transition-colors">
                   Começar Teste Grátis
                 </Button>
               </CardContent>
@@ -427,11 +436,21 @@ const Index = () => {
             com automação comercial inteligente
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-50 text-lg px-8 py-4">
-              <Zap className="w-5 h-5 mr-2" />
-              Começar Grátis Agora
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600 text-lg px-8 py-4">
+            <Link to="/login">
+              <Button
+                size="lg"
+                style={{ backgroundColor: "#7c3aed", color: "#fff", border: "none" }}
+                className="text-lg px-8 py-4 hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 transition-colors"
+              >
+                <Zap className="w-5 h-5 mr-2" />
+                Começar Grátis Agora
+              </Button>
+            </Link>
+            <Button
+              size="lg"
+              style={{ backgroundColor: "#7c3aed", color: "#fff", border: "none" }}
+              className="text-lg px-8 py-4 hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 transition-colors"
+            >
               Agendar Demonstração
             </Button>
           </div>

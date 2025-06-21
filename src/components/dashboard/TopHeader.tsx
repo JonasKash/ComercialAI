@@ -33,7 +33,7 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
             onClick={onMenuToggle}
             className="md:hidden mr-2"
           >
-            <Menu className="h-5 w-5" />
+            <Menu className="h-5 w-5 text-foreground dark:text-white" />
           </Button>
           <h1 className="text-xl font-semibold text-foreground">{title}</h1>
         </div>
@@ -41,7 +41,7 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
         {/* Center - Search */}
         <div className="hidden md:flex flex-1 max-w-md mx-8">
           <div className="relative w-full">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground dark:text-white" />
             <Input
               type="text"
               placeholder="Buscar campanhas, leads, criativos..."
@@ -61,7 +61,7 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm" className="relative">
-                <Bell className="h-5 w-5" />
+                <Bell className="h-5 w-5 text-foreground dark:text-white" />
                 {notificationCount > 0 && (
                   <Badge 
                     variant="destructive" 
@@ -108,7 +108,7 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm">
-                <HelpCircle className="h-5 w-5" />
+                <HelpCircle className="h-5 w-5 text-foreground dark:text-white" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -132,7 +132,7 @@ export default function TopHeader({ onMenuToggle, title }: TopHeaderProps) {
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
-                <User className="mr-2 h-4 w-4" />
+                <User className="mr-2 h-4 w-4 text-foreground dark:text-white" />
                 Meu Perfil
               </DropdownMenuItem>
               <DropdownMenuItem>Configurações</DropdownMenuItem>
