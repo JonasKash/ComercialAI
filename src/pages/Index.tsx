@@ -3,6 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Star, TrendingUp, Users, Zap, Brain, Target, BarChart3, MessageSquare } from "lucide-react";
 import { Link } from "react-router-dom";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 const Index = () => {
   return (
@@ -30,6 +31,7 @@ const Index = () => {
                 Começar Grátis
               </Button>
             </Link>
+            <ThemeToggle />
           </nav>
         </div>
       </header>
