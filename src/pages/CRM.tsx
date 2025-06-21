@@ -6,7 +6,7 @@ import CRMContent from '@/components/dashboard/sections/CRMContent';
 
 export default function CRM() {
   const [sidebarExpanded, setSidebarExpanded] = useState(true);
-#teste
+
   return (
     <AuthWrapper>
       <div className="flex h-screen bg-background">
