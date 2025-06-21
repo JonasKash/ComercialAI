@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+
+=======
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
 import React, { useState } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -5,7 +9,10 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Sparkles, Mail, Lock, Eye, EyeOff, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+<<<<<<< HEAD
+=======
 import { useNavigate } from 'react-router-dom';
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
@@ -17,7 +24,10 @@ export default function AuthPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+<<<<<<< HEAD
+=======
   const navigate = useNavigate();
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
 
   const handleTestLogin = () => {
     setEmail('teste@commercialai.com');
@@ -42,7 +52,10 @@ export default function AuthPage() {
           title: "Login realizado com sucesso!",
           description: "Bem-vindo de volta ao CommercialAI Pro.",
         });
+<<<<<<< HEAD
+=======
         navigate('/dashboard');
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
       } else {
         const { data, error } = await supabase.auth.signUp({
           email,
@@ -129,21 +142,36 @@ export default function AuthPage() {
           </p>
         </div>
 
+<<<<<<< HEAD
+        {/* Seção de Teste - Botão para credenciais de teste */}
+=======
         {/* Seção de Teste - Botão para credencial de teste Jonas */}
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
         <Card className="mb-4 bg-yellow-50 border-yellow-200">
           <CardContent className="p-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
                 <User className="h-5 w-5 text-yellow-600 mr-2" />
                 <div>
+<<<<<<< HEAD
+                  <p className="text-sm font-medium text-yellow-800">Usuário de Teste</p>
+                  <p className="text-xs text-yellow-600">teste@commercialai.com</p>
+=======
                   <p className="text-sm font-medium text-yellow-800">Jonas Dev</p>
                   <p className="text-xs text-yellow-600">jonasdev3@hotmail.com</p>
                   <p className="text-xs text-yellow-600">Senha: javf21jonas</p>
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
                 </div>
               </div>
               <Button 
                 variant="outline" 
                 size="sm"
+<<<<<<< HEAD
+                onClick={handleTestLogin}
+                className="border-yellow-300 text-yellow-700 hover:bg-yellow-100"
+              >
+                Usar Teste
+=======
                 onClick={() => {
                   setEmail('jonasdev3@hotmail.com');
                   setPassword('javf21jonas');
@@ -152,6 +180,7 @@ export default function AuthPage() {
                 className="border-yellow-300 text-yellow-700 hover:bg-yellow-100"
               >
                 Usar Jonas
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
               </Button>
             </div>
           </CardContent>

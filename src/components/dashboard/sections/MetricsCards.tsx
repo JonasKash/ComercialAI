@@ -1,10 +1,17 @@
 
 import React from 'react';
+<<<<<<< HEAD
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Users, TrendingUp, DollarSign, Target, ArrowUp, ArrowDown } from 'lucide-react';
+import { useQuery } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+=======
 import { Card, CardContent } from '@/components/ui/card';
 import { Users, TrendingUp, DollarSign, Target, ArrowUp, ArrowDown } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { supabase } from '@/integrations/supabase/client';
 import { cn } from '@/lib/utils';
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
 
 interface MetricCardProps {
   title: string;
@@ -12,6 +19,21 @@ interface MetricCardProps {
   change: number;
   changeType: 'positive' | 'negative';
   icon: React.ReactNode;
+<<<<<<< HEAD
+  color: string;
+}
+
+function MetricCard({ title, value, change, changeType, icon, color }: MetricCardProps) {
+  const isPositive = changeType === 'positive';
+  
+  return (
+    <Card>
+      <CardContent className="p-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <p className="text-sm font-medium text-gray-600 mb-1">{title}</p>
+            <p className="text-2xl font-bold text-gray-900">{value}</p>
+=======
   colorClass: string;
 }
 
@@ -25,12 +47,26 @@ function MetricCard({ title, value, change, changeType, icon, colorClass }: Metr
           <div>
             <p className="text-sm font-medium text-muted-foreground mb-1">{title}</p>
             <p className="text-2xl font-bold text-foreground">{value}</p>
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
             <div className="flex items-center mt-2">
               {isPositive ? (
                 <ArrowUp className="h-4 w-4 text-green-500 mr-1" />
               ) : (
                 <ArrowDown className="h-4 w-4 text-red-500 mr-1" />
               )}
+<<<<<<< HEAD
+              <span className={`text-sm font-medium ${isPositive ? 'text-green-600' : 'text-red-600'}`}>
+                {Math.abs(change)}%
+              </span>
+              <span className="text-sm text-gray-500 ml-1">vs. mês anterior</span>
+            </div>
+          </div>
+          <div 
+            className="w-12 h-12 rounded-full flex items-center justify-center"
+            style={{ backgroundColor: `${color}20` }}
+          >
+            <div style={{ color }}>{icon}</div>
+=======
               <span className={cn("text-sm font-medium", isPositive ? 'text-green-500' : 'text-red-500')}>
                 {Math.abs(change)}%
               </span>
@@ -39,6 +75,7 @@ function MetricCard({ title, value, change, changeType, icon, colorClass }: Metr
           </div>
           <div className={cn("w-12 h-12 rounded-full flex items-center justify-center", colorClass)}>
             {icon}
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
           </div>
         </div>
       </CardContent>
@@ -84,32 +121,52 @@ export default function MetricsCards() {
       value: leadsCount?.toString() || (metrics?.total_leads?.toString() || '247'),
       change: metrics?.leads_change || 12.5,
       changeType: 'positive' as const,
+<<<<<<< HEAD
+      icon: <Users className="h-6 w-6" />,
+      color: '#6B46C1'
+=======
       icon: <Users className="h-6 w-6 text-primary" />,
       colorClass: 'bg-primary/10'
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
     },
     {
       title: 'Taxa de Conversão',
       value: metrics?.conversion_rate ? `${metrics.conversion_rate}%` : '3.2%',
       change: metrics?.conversion_change || 8.1,
       changeType: 'positive' as const,
+<<<<<<< HEAD
+      icon: <Target className="h-6 w-6" />,
+      color: '#805AD5'
+=======
       icon: <Target className="h-6 w-6 text-sky-500" />,
       colorClass: 'bg-sky-500/10'
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
     },
     {
       title: 'Receita Gerada',
       value: metrics?.revenue ? `R$ ${metrics.revenue.toLocaleString()}` : 'R$ 15.800',
       change: metrics?.revenue_change || 15.3,
       changeType: 'positive' as const,
+<<<<<<< HEAD
+      icon: <DollarSign className="h-6 w-6" />,
+      color: '#9F7AEA'
+=======
       icon: <DollarSign className="h-6 w-6 text-emerald-500" />,
       colorClass: 'bg-emerald-500/10'
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
     },
     {
       title: 'ROI Campanhas',
       value: metrics?.roi ? `${metrics.roi}x` : '4.2x',
       change: metrics?.roi_change || -2.4,
       changeType: (metrics?.roi_change || -2.4) >= 0 ? 'positive' as const : 'negative' as const,
+<<<<<<< HEAD
+      icon: <TrendingUp className="h-6 w-6" />,
+      color: '#B794F4'
+=======
       icon: <TrendingUp className="h-6 w-6 text-orange-500" />,
       colorClass: 'bg-orange-500/10'
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
     }
   ];
 
@@ -120,9 +177,15 @@ export default function MetricsCards() {
           <Card key={i}>
             <CardContent className="p-6">
               <div className="animate-pulse">
+<<<<<<< HEAD
+                <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+                <div className="h-8 bg-gray-200 rounded w-1/2 mb-2"></div>
+                <div className="h-4 bg-gray-200 rounded w-full"></div>
+=======
                 <div className="h-4 bg-muted rounded w-3/4 mb-2"></div>
                 <div className="h-8 bg-muted rounded w-1/2 mb-2"></div>
                 <div className="h-4 bg-muted rounded w-full"></div>
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
               </div>
             </CardContent>
           </Card>
