@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Star, TrendingUp, Users, Zap, Brain, Target, BarChart3, MessageSquare } from "lucide-react";
+<<<<<<< HEAD
+=======
+import { Link } from "react-router-dom";
+import { ThemeToggle } from "@/components/theme-toggle";
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
 
 const Index = () => {
   return (
@@ -20,12 +28,26 @@ const Index = () => {
             <a href="#features" className="text-gray-600 hover:text-purple-600 transition-colors">Recursos</a>
             <a href="#pricing" className="text-gray-600 hover:text-purple-600 transition-colors">Preços</a>
             <a href="#testimonials" className="text-gray-600 hover:text-purple-600 transition-colors">Cases</a>
+<<<<<<< HEAD
             <Button variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
               Login
             </Button>
             <Button className="bg-purple-600 hover:bg-purple-700">
               Começar Grátis
             </Button>
+=======
+            <Link to="/login">
+              <Button variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50">
+                Login
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button className="bg-purple-600 hover:bg-purple-700">
+                Começar Grátis
+              </Button>
+            </Link>
+            <ThemeToggle />
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
           </nav>
         </div>
       </header>
@@ -45,6 +67,7 @@ const Index = () => {
             Baseado em 25+ anos de experiência em vendas para empreendedores como você.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+<<<<<<< HEAD
             <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-lg px-8 py-4">
               <Zap className="w-5 h-5 mr-2" />
               Começar Grátis Agora
@@ -52,6 +75,22 @@ const Index = () => {
             <Button size="lg" variant="outline" className="border-purple-200 text-purple-700 hover:bg-purple-50 text-lg px-8 py-4">
               Ver Demonstração
             </Button>
+=======
+            <Link to="/login">
+              <Button size="lg" className="bg-purple-600 text-white border border-purple-600 hover:bg-white hover:text-purple-700 hover:border-purple-600 text-lg px-8 py-4 transition-colors">
+                <Zap className="w-5 h-5 mr-2" />
+                Começar Grátis Agora
+              </Button>
+            </Link>
+            <Link to="/login">
+              <Button
+                size="lg"
+                className="bg-purple-600 text-white border border-purple-600 hover:bg-white hover:text-purple-700 hover:border-purple-600 text-lg px-8 py-4 transition-colors"
+              >
+                Ver Demonstração
+              </Button>
+            </Link>
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
           </div>
           <div className="flex items-center justify-center space-x-8 text-sm text-gray-500">
             <div className="flex items-center">
@@ -231,8 +270,13 @@ const Index = () => {
                     CRM básico (50 leads)
                   </li>
                 </ul>
+<<<<<<< HEAD
                 <Button className="w-full" variant="outline">
                   Começar Grátis
+=======
+                <Button className="w-full" variant="outline" asChild>
+                  <Link to="/login">Começar Grátis</Link>
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
                 </Button>
               </CardContent>
             </Card>
@@ -275,7 +319,11 @@ const Index = () => {
                     Integrações básicas
                   </li>
                 </ul>
+<<<<<<< HEAD
                 <Button className="w-full bg-purple-600 hover:bg-purple-700">
+=======
+                <Button className="w-full bg-purple-600 text-white border border-purple-600 hover:bg-white hover:text-purple-700 hover:border-purple-600 transition-colors">
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
                   Começar Teste Grátis
                 </Button>
               </CardContent>
@@ -425,11 +473,29 @@ const Index = () => {
             com automação comercial inteligente
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+<<<<<<< HEAD
             <Button size="lg" className="bg-white text-purple-600 hover:bg-gray-50 text-lg px-8 py-4">
               <Zap className="w-5 h-5 mr-2" />
               Começar Grátis Agora
             </Button>
             <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600 text-lg px-8 py-4">
+=======
+            <Link to="/login">
+              <Button
+                size="lg"
+                style={{ backgroundColor: "#7c3aed", color: "#fff", border: "none" }}
+                className="text-lg px-8 py-4 hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 transition-colors"
+              >
+                <Zap className="w-5 h-5 mr-2" />
+                Começar Grátis Agora
+              </Button>
+            </Link>
+            <Button
+              size="lg"
+              style={{ backgroundColor: "#7c3aed", color: "#fff", border: "none" }}
+              className="text-lg px-8 py-4 hover:bg-purple-700 focus:bg-purple-700 active:bg-purple-800 transition-colors"
+            >
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
               Agendar Demonstração
             </Button>
           </div>

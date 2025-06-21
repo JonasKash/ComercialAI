@@ -17,13 +17,20 @@ export default function Dashboard() {
 
   return (
     <AuthWrapper>
+<<<<<<< HEAD
       <div className="flex h-screen bg-gray-50">
+=======
+      <div className="flex h-screen bg-background">
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
         {/* Menu Lateral */}
         <Sidebar 
           expanded={sidebarExpanded} 
           onToggle={() => setSidebarExpanded(!sidebarExpanded)} 
         />
+<<<<<<< HEAD
         
+=======
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
         {/* Conteúdo Principal */}
         <div className="flex-1 flex flex-col overflow-hidden">
           {/* Header Superior */}
@@ -31,7 +38,10 @@ export default function Dashboard() {
             onMenuToggle={() => setSidebarExpanded(!sidebarExpanded)}
             title="Dashboard"
           />
+<<<<<<< HEAD
           
+=======
+>>>>>>> 0412e472e59cda104ff3c14cfe677a438d96a8b4
           {/* Área de Conteúdo */}
           <main className="flex-1 overflow-y-auto p-4 md:p-6">
             <DashboardContent />
