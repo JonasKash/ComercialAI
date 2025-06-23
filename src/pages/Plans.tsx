@@ -88,10 +88,14 @@ const Plans = () => {
   const handleUpgrade = () => {
     if (selectedPlan) {
       toast({
-        title: "Upgrade iniciado",
-        description: "Redirecionando para o checkout...",
+        title: "Redirecionando para checkout",
+        description: "Você será direcionado para a página de pagamento...",
       });
-      // Aqui você implementaria a integração com o sistema de pagamento
+      
+      // Redirecionar para o checkout com o plano selecionado
+      setTimeout(() => {
+        window.location.href = `http://localhost:8084/?plan=${selectedPlan}`;
+      }, 1500);
     } else {
       toast({
         title: "Selecione um plano",
