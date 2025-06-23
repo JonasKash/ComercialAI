@@ -180,3 +180,31 @@ Para dúvidas ou problemas:
 ## 📄 Licença
 
 Este projeto é parte do CommercialAI Pro e está sob licença proprietária.
+
+## ⚠️ Importante
+
+Para que o checkout funcione corretamente, **é necessário rodar o servidor backend** responsável pelas rotas de pagamento (Mercado Pago, PIX, etc). Se o backend não estiver rodando, ao clicar em checkout o site apenas irá carregar e não irá prosseguir para o pagamento.
+
+## Como rodar o servidor backend
+
+### 1. A partir da raiz do projeto
+Se você estiver na pasta principal do projeto (`commercialai-pro-suite-main`), execute:
+
+```bash
+node checkout/server.js
+```
+
+### 2. A partir da pasta `checkout`
+Se você estiver dentro da pasta `checkout`, execute:
+
+```bash
+node server.js
+```
+
+---
+
+- Certifique-se de que as dependências estão instaladas (`npm install` ou `bun install`).
+- O backend deve rodar na porta 3001 por padrão. Se precisar mudar, ajuste as URLs no frontend.
+- O terminal deve mostrar uma mensagem como: `Servidor rodando na porta 3001`.
+
+Se aparecer algum erro ao iniciar, verifique as mensagens no terminal e envie para o suporte/canal de desenvolvimento.
