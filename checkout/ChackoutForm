@@ -1,0 +1,87 @@
+import { useState } from 'react';
+import { CreditCard, User, Mail } from 'lucide-react';
+
+interface Plan {
+  id: string;
+  name: string;
+  price: number;
+  period: string;
+}
+
+interface CheckoutFormProps {
+  plan: Plan;
+  onSubmit: (userData: { email: string; name: string }) => void;
+  loading: boolean;
+}
+
+const CheckoutForm = ({ plan, onSubmit, loading }: CheckoutFormProps) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
+  return (
+    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+      <div className="flex items-center mb-6">
+        <CreditCard className="w-6 h-6 text-purple-600 dark:text-purple-400 mr-2" />
+        <h2 className="text-xl font-bold text-gray-900 dark:text-white">
+          Finalizar Compra - {plan.name}
+        </h2>
+      </div>
+
+      <div className="mb-6 p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+        <div className="flex justify-between items-center">
+          <span className="text-gray-700 dark:text-gray-300">Total:</span>
+          <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+            R$ {plan.price}/{plan.period}
+          </span>
+        </div>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="relative">
+          <User className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Nome completo"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            required
+          />
+        </div>
+
+        <div className="relative">
+          <Mail className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+          <input
+            type="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            required
+          />
+        </div>
+
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white py-3 rounded-lg font-semibold transition-colors"
+        >
+          {loading ? 'Processando...' : 'Pagar com Mercado Pago'}
+        </button>
+      </form>
+
+      <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 text-center">
+        Você será redirecionado para o Mercado Pago para finalizar o pagamento
+      </p>
+    </div>
+  );
+};
+
+export default CheckoutForm;

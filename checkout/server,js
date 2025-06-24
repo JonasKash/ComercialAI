@@ -1,0 +1,99 @@
+const express = require('express');
+const cors = require('cors');
+const mercadopago = require('mercadopago');
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.use(cors());
+app.use(express.json());
+
+// Configurar Mercado Pago
+mercadopago.configure({
+  access_token: process.env.MERCADO_PAGO_ACCESS_TOKEN
+});
+
+// Planos disponíveis
+const plans = {
+  free: {
+    name: 'Gratuito',
+    price: 0,
+    features: ['1 usuário', '10 criativos/mês', '1.000 impressões', 'CRM básico (50 leads)']
+  },
+  growth: {
+    name: 'Growth',
+    price: 49,
+    features: ['3 usuários', '50 criativos/mês', '5.000 impressões', 'CRM completo (500 leads)', 'Integrações básicas']
+  },
+  scale: {
+    name: 'Scale',
+    price: 99,
+    features: ['10 usuários', 'Criativos ilimitados', '25.000 impressões', 'Leads ilimitados', 'Todas as integrações', 'API para desenvolvedores']
+  }
+};
+
+// Rota para criar preferência de pagamento
+app.post('/api/create-preference', async (req, res) => {
+  try {
+    const { planId, userEmail, userName } = req.body;
+    const plan = plans[planId];
+    
+    if (!plan) {
+      return res.status(400).json({ error: 'Plano não encontrado' });
+    }
+
+    const preference = {
+      items: [
+        {
+          title: `CommercialAI Pro - ${plan.name}`,
+          unit_price: plan.price,
+          quantity: 1,
+          currency_id: 'BRL'
+        }
+      ],
+      payer: {
+        email: userEmail,
+        name: userName
+      },
+      back_urls: {
+        success: `${process.env.FRONTEND_URL}/success`,
+        failure: `${process.env.FRONTEND_URL}/checkout?error=payment_failed`,
+        pending: `${process.env.FRONTEND_URL}/checkout?error=payment_pending`
+      },
+      auto_return: 'approved',
+      external_reference: `${planId}_${Date.now()}`,
+      notification_url: `${process.env.BACKEND_URL}/api/webhook`
+    };
+
+    const response = await mercadopago.preferences.create(preference);
+    res.json({ init_point: response.body.init_point });
+  } catch (error) {
+    console.error('Erro ao criar preferência:', error);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+});
+
+// Webhook para notificações do Mercado Pago
+app.post('/api/webhook', async (req, res) => {
+  try {
+    const { type, data } = req.body;
+    
+    if (type === 'payment') {
+      const payment = await mercadopago.payment.findById(data.id);
+      console.log('Pagamento recebido:', payment.body);
+      
+      // Aqui você pode implementar a lógica para ativar o plano do usuário
+      // Por exemplo, atualizar o banco de dados, enviar email, etc.
+    }
+    
+    res.status(200).send('OK');
+  } catch (error) {
+    console.error('Erro no webhook:', error);
+    res.status(500).send('Erro');
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
